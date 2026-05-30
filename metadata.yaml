@@ -1,0 +1,6 @@
+name: astrbot_plugin_chat_initiator
+desc: 随机/定时主动聊天插件，可读取历史和当前人设，也可调用表情包小偷库存发图
+help: 自动运行，无需指令。支持随机触发、定时触发、读历史、发表情包、黑白名单、防打扰。
+version: v1.0.2
+author: mx
+repo: ""

@@ -1,0 +1,150 @@
+{
+  "_general_section": {
+    "description": "=== 基本设置 ===",
+    "type": "text",
+    "invisible": true
+  },
+  "random_trigger_enabled": {
+    "description": "开启随机触发",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后，插件会在活跃时段内随机时间触发主动聊天"
+  },
+  "random_min_minutes": {
+    "description": "随机触发最小间隔（分钟）",
+    "type": "int",
+    "default": 20,
+    "slider": {"min": 1, "max": 300, "step": 5},
+    "hint": "两次随机触发之间至少间隔多少分钟"
+  },
+  "random_max_minutes": {
+    "description": "随机触发最大间隔（分钟）",
+    "type": "int",
+    "default": 180,
+    "slider": {"min": 5, "max": 720, "step": 5},
+    "hint": "两次随机触发之间最多间隔多少分钟"
+  },
+  "schedule_trigger_enabled": {
+    "description": "开启定时触发",
+    "type": "bool",
+    "default": false,
+    "hint": "开启后，按照下方设置的定时时间点触发主动聊天"
+  },
+  "schedule_times": {
+    "description": "定时时间点（HH:MM，逗号分隔）",
+    "type": "string",
+    "default": "08:00,12:00,18:00,22:00",
+    "hint": "如 08:00,12:00,18:00,22:00。优先级高于 cron 表达式。"
+  },
+  "schedule_cron": {
+    "description": "定时Cron表达式（五段制）",
+    "type": "string",
+    "default": "0 8,12,18,22 * * *",
+    "hint": "Cron表达式，如 0 8,12,18,22 * * *。schedule_times 为空时才生效。"
+  },
+  "active_start_hour": {
+    "description": "活跃开始时间（24小时制）",
+    "type": "int",
+    "default": 9,
+    "slider": {"min": 0, "max": 23, "step": 1},
+    "hint": "0-23，插件只在此时间段内活动"
+  },
+  "active_end_hour": {
+    "description": "活跃结束时间（24小时制）",
+    "type": "int",
+    "default": 24,
+    "slider": {"min": 0, "max": 24, "step": 1},
+    "hint": "0-24，插件只在此时间段内活动（24表示24点/0点）"
+  },
+  "cool_down_minutes": {
+    "description": "冷却时间（分钟）",
+    "type": "int",
+    "default": 60,
+    "slider": {"min": 0, "max": 1440, "step": 5},
+    "hint": "两次触发之间的最短时间间隔，0表示无冷却（不建议），默认60分钟"
+  },
+  "_target_section": {
+    "description": "=== 触发对象设置 ===",
+    "type": "text",
+    "invisible": true
+  },
+  "enable_group_chat": {
+    "description": "在群聊中生效",
+    "type": "bool",
+    "default": true,
+    "hint": "是否在群聊中触发主动聊天"
+  },
+  "enable_private_chat": {
+    "description": "在私聊中生效",
+    "type": "bool",
+    "default": false,
+    "hint": "是否在私聊中触发主动聊天"
+  },
+  "group_blacklist": {
+    "description": "群聊黑名单（群号，逗号分隔）",
+    "type": "string",
+    "default": "",
+    "hint": "不触发主动聊天的群号，如：123456789,987654321"
+  },
+  "group_whitelist": {
+    "description": "群聊白名单（群号，逗号分隔）",
+    "type": "string",
+    "default": "",
+    "hint": "只在白名单群聊中触发，留空表示无限制"
+  },
+  "user_blacklist": {
+    "description": "用户黑名单（QQ号，逗号分隔）",
+    "type": "string",
+    "default": "",
+    "hint": "不对这些用户发起私聊，如：123456,789012"
+  },
+  "user_whitelist": {
+    "description": "用户白名单（QQ号，逗号分隔）",
+    "type": "string",
+    "default": "",
+    "hint": "只在白名单用户中触发私聊，留空表示无限制"
+  },
+  "_content_section": {
+    "description": "=== 内容生成设置 ===",
+    "type": "text",
+    "invisible": true
+  },
+  "text_probability": {
+    "description": "文字聊天概率（%）",
+    "type": "int",
+    "default": 70,
+    "slider": {"min": 0, "max": 100, "step": 5},
+    "hint": "生成文字话题的概率，剩余概率为发送表情包"
+  },
+  "max_history_rounds": {
+    "description": "读取历史对话轮数",
+    "type": "int",
+    "default": 20,
+    "slider": {"min": 1, "max": 50, "step": 1},
+    "hint": "读取最近多少轮对话用于判断是否发起合适话题（1轮包含用户和AI的完整回合）"
+  },
+  "require_topic_relevance": {
+    "description": "要求话题相关性",
+    "type": "bool",
+    "default": true,
+    "hint": "开启：如果无历史可延续，则优先发送表情包而非文字。关闭：总是尝试生成新话题文字。"
+  },
+  "new_topic_prompt": {
+    "description": "新话题生成提示词",
+    "type": "string",
+    "default": "请基于我的人设和当前时间，生成一个自然、有趣的聊天开场白，不要直接说'你好'或'在吗'。",
+    "hint": "当无法生成相关话题时，使用此提示词生成全新话题"
+  },
+  "emoji_search_word": {
+    "description": "表情包搜索关键词",
+    "type": "string",
+    "default": "开心",
+    "hint": "发送表情包时，自动搜索该关键词的表情包（可设置多个用逗号分隔）"
+  },
+  "check_disturbing": {
+    "description": "检查打扰程度",
+    "type": "bool",
+    "default": true,
+    "hint": "发送前让AI判断是否会打扰对方"
+  }
+}
